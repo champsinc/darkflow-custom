@@ -26,9 +26,6 @@ def _save_ckpt(self, step, loss_profile):
     ckpt = file.format(model, step, '')
     ckpt = os.path.join(self.FLAGS.backup, ckpt)
     self.say('Checkpoint at step {}'.format(step))
-    with open("logs/output.txt", "a") as myfile:
-        myfile.write('Checkpoint at step {}'.format(step))
-        myfile.write("\n")
     self.saver.save(self.sess, ckpt)
 
 
@@ -68,9 +65,6 @@ def train(self):
 
         form = 'step {} - loss {} - moving ave loss {}'
         self.say(form.format(step_now, loss, loss_mva))
-        with open("logs/output.txt", "a") as myfile:
-            myfile.write(form.format(step_now, loss, loss_mva))
-            myfile.write("\n")
         profile += [(loss, loss_mva)]
 
         ckpt = (i+1) % (self.FLAGS.save // self.FLAGS.batch)

@@ -40,6 +40,9 @@ def say(self, *msgs):
     for msg in msgs:
         if msg is None: continue
         print(msg)
+        with open("logs/output.txt", "a") as myfile:
+            myfile.write(msg)
+            myfile.write("\n")
 
 def load_old_graph(self, ckpt): 
     ckpt_loader = create_loader(ckpt)
